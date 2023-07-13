@@ -9,6 +9,7 @@ from scipy.signal import convolve2d
 from math import sqrt
 from scipy.ndimage.filters import gaussian_filter
 from scipy.signal import medfilt
+from scipy import ndimage, datasets
 
 # Embedding strategy: DWT-SVD with local selection of blocks based on a spatial function and attacks
 
@@ -50,7 +51,13 @@ def sharpening(img, sigma, alpha):
 def median(img, kernel_size):
     attacked = medfilt(img, kernel_size)
     return attacked
-
+def rotations(img,angle):
+    if angle > 10:
+        print("Cannot rotate by angle greater than 10")
+        return img
+    attacked = ndimage.rotate(img, angle, reshape=False)
+    return attacked
+    
 def resizing(img, scale):
   from skimage.transform import rescale
   x, y = img.shape
@@ -119,16 +126,14 @@ def embedding(original_image, watermark_path="howimetyourmark.npy" ):
         attacked_image_tmp = cv2.resize(original_image, (0, 0), fx=scale, fy=scale)
         attacked_image_tmp = cv2.resize(attacked_image_tmp, (512, 512))
         blank_image += np.abs(attacked_image_tmp - original_image)
-
-    #plot blank image
-    #plt.title('Attack phase mask')
-    #plt.imshow(blank_image, cmap='gray')
-    #plt.show()
+        
+    rotate_factors =  [1,5,7,6,8]
+    for rotate in rotate_factors:
+        rotated_img = rotate(original_image,rotate)
+        blank_img += np.abs(rotated_img - original_image)
 
     # end time
     end = time.time()
-    #print("[EMBEDDING] Time of attacks for embedding: " + str(end - start))
-    #print('[EMBEDDING] Spatial function:', spatial_function)
 
 
     # find the min blocks (sum or mean of the 64 elements for each block) using sorting (min is best)
