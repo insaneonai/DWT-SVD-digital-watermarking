@@ -69,7 +69,7 @@ def resizing(img, scale):
 def embedding(original_image, watermark_path="howimetyourmark.npy" ):
 
     original_image = cv2.imread(original_image, 0)
-
+    print(original_image)
     # plot original image
     plt.title("Original image")
     plt.imshow(original_image, cmap='gray')
@@ -94,10 +94,10 @@ def embedding(original_image, watermark_path="howimetyourmark.npy" ):
 
     start = time.time()
 
-    #QF = [5,6, 7, 8,9, 10]
-    #for qf in QF:
-    #    attacked_image_tmp = jpeg_compression(original_image, qf)
-    #    blank_image += np.abs(attacked_image_tmp - original_image)
+    QF = [5,6, 7, 8,9, 10]
+    for qf in QF:
+        attacked_image_tmp = jpeg_compression(original_image, qf)
+        blank_image += np.abs(attacked_image_tmp - original_image)
 
     blur_sigma_values = [0.1, 0.5, 1, 2, [1, 1], [2, 1]]
     for sigma in blur_sigma_values:
@@ -128,9 +128,9 @@ def embedding(original_image, watermark_path="howimetyourmark.npy" ):
         blank_image += np.abs(attacked_image_tmp - original_image)
         
     rotate_factors =  [1,5,7,6,8]
-    for rotate in rotate_factors:
-        rotated_img = rotate(original_image,rotate)
-        blank_img += np.abs(rotated_img - original_image)
+    for rotattions in rotate_factors:
+        rotated_img = rotations(original_image,rotattions)
+        blank_image += np.abs(rotated_img - original_image)
 
     # end time
     end = time.time()
@@ -221,8 +221,10 @@ def embedding(original_image, watermark_path="howimetyourmark.npy" ):
     watermarked_image += np.uint8(blank_image)
 
     # Compute quality
+    """
     w = wpsnr(original_image, watermarked_image)
     print('[EMBEDDING] wPSNR: %.2fdB' % w)
+    """
 
     #plot watermarked image
     plt.title('Watermarked image')
