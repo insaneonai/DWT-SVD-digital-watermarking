@@ -1,15 +1,5 @@
 # DWT-SVD-digital-watermarking
-Repository related to the "Catch the Mark" competition of the **Multimedia Data Security** graduate course of University of Trento, academic year 2022/2023.
-<br><br>
-Group name: **howimetyourmark**
-
-Final mark: **30/30**
-
-Contributors:
-+ Leonardo Vicentini - [vicentinileonardo](https://github.com/vicentinileonardo)
-+ Matteo Darra - [MatteoDarra](https://github.com/MatteoDarra)
-+ Sofia Zanrosso - [sofiazanrosso](https://github.com/sofiazanrosso)
-+ Roberta Bonaccorso - [robi00](https://github.com/robi00)
+Repository forked from vicentinileonardo/DWT-SVD-digital-watermarking
 
 
 ## Directory structure
