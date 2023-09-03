@@ -10,7 +10,7 @@ from math import sqrt
 from scipy.ndimage.filters import gaussian_filter
 from scipy.signal import medfilt
 
-watermark_to_embed = np.load("yourwatermark.npy")
+watermark_to_embed = np.load("watermark.npy")
 svds = np.linalg.svd(watermark_to_embed.reshape((32,32)))
 
 # Detection, with these parameters, passes the 6 checks of the tester2.py script
