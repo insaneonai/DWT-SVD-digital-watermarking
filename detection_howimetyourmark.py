@@ -203,10 +203,10 @@ def detection(input1, input2, input3):
         watermark_status = 0
 
     output1 = watermark_status
-    output2 = wpsnr(watermarked_image, attacked_image)
+    #output2 = wpsnr(watermarked_image, attacked_image)
 
     # end time
     #end = time.time()
     #print('[DETECTION] Time: %.2fs' % (end - start))
 
-    return output1, output2
+    return output1
